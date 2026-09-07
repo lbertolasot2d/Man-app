@@ -1,9 +1,9 @@
 package com.example.man_app.data.webdb
 
-import androidx.room3.ConstructedBy
+
 import androidx.room3.Database
 import androidx.room3.RoomDatabase
-import androidx.room3.RoomDatabaseConstructor
+
 import com.example.man_app.data.model.*
 
 @Database(
@@ -39,8 +39,7 @@ import com.example.man_app.data.model.*
     version = 23,
     exportSchema = false
 )
-@ConstructedBy(AppDatabaseConstructor::class)
-abstract class AppDatabase : RoomDatabase() {
+ abstract class AppDatabase : RoomDatabase() {
     abstract fun personnelDao(): PersonnelDao
     abstract fun productDao(): ProductDao
     abstract fun mattonieraDao(): MattonieraDao
@@ -51,9 +50,4 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun faultDao(): FaultDao
     abstract fun checklistDao(): ChecklistDao
     abstract fun productionDao(): ProductionDao
-}
-
-@Suppress("KotlinNoActualForExpect")
-expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
-    override fun initialize(): AppDatabase
 }
