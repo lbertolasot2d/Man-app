@@ -1,0 +1,14 @@
+{
+  "name": "Man-app-composeApp-test",
+  "version": "0.0.0-unspecified",
+  "main": "Man-app-composeApp-test.mjs",
+  "devDependencies": {},
+  "dependencies": {
+    "@js-joda/timezone": "2.22.0",
+    "@js-joda/core": "3.2.0",
+    "ws": "8.20.1"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}

@@ -1,0 +1,2 @@
+
+<Man-app:composeApp>:com.example.man_app:com.example.man_app.data.model:com.example.man_app.data.remote:com.example.man_app.data.sync:com.example.man_app.data.webdb:!com.example.man_app.ui.components:com.example.man_app.ui.fermate:com.example.man_app.ui.home:"com.example.man_app.ui.impilatrice:!com.example.man_app.ui.mattoniera: com.example.man_app.ui.personnel:#com.example.man_app.ui.scaricatrice: com.example.man_app.ui.selection:com.example.man_app.ui.shifts:com.example.man_app.ui.theme:com.example.man_app.util:&man_app.composeapp.generated.resources
