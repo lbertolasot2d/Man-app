@@ -4,6 +4,7 @@ import androidx.room3.Entity
 import androidx.room3.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNames
 import com.example.man_app.util.randomUUID
 
 @Serializable
@@ -13,12 +14,12 @@ data class ImpilatriceReport(
     @SerialName("date") val date: Long,
     @SerialName("starttime") val startTime: Long,
     @SerialName("endtime") val endTime: Long = 0,
-    @SerialName("operatorid") val operatorId: String,
-    @SerialName("productid") val productId: String,
+    @SerialName("operatorid") @JsonNames("operator_id") val operatorId: String,
+    @SerialName("productid") @JsonNames("product_id") val productId: String,
     @SerialName("shift") val shift: String, // Label like "1", "2", etc.
     @SerialName("sigla") val sigla: String? = null,
-    @SerialName("lineid") val lineId: String,
-    @SerialName("machineid") val machineId: String,
+    @SerialName("lineid") @JsonNames("line_id") val lineId: String,
+    @SerialName("machineid") @JsonNames("machine_id") val machineId: String,
     
     @SerialName("isclosed") val isClosed: Boolean = false,
     
@@ -30,54 +31,60 @@ data class ImpilatriceReport(
     @SerialName("cagematerialdistribution") val cageMaterialDistribution: String = "Bene", // Bene / Male
     @SerialName("cagenotes") val cageNotes: String = "",
     
-    @SerialName("lastupdated") val lastUpdated: Long = com.example.man_app.util.getNowMillis(),
-    @SerialName("syncstatus") val syncStatus: String = SyncStatus.PENDING
+    @SerialName("lastupdated") @JsonNames("last_updated") val lastUpdated: Long = com.example.man_app.util.getNowMillis(),
+    @SerialName("syncstatus") @JsonNames("sync_status") val syncStatus: String = SyncStatus.PENDING
 )
 
 @Serializable
 @Entity(tableName = "impilatrice_cage_events")
 data class ImpilatriceCageEvent(
     @PrimaryKey @SerialName("id") val id: String = randomUUID(),
-    @SerialName("reportid") val reportId: String,
+    @SerialName("reportid") @JsonNames("report_id") val reportId: String,
     @SerialName("timestamp") val timestamp: Long,
     @SerialName("change") val change: Int, // +1 or -1
     
-    @SerialName("lastupdated") val lastUpdated: Long = com.example.man_app.util.getNowMillis(),
-    @SerialName("syncstatus") val syncStatus: String = SyncStatus.PENDING
+    @SerialName("lastupdated") @JsonNames("last_updated") val lastUpdated: Long = com.example.man_app.util.getNowMillis(),
+    @SerialName("syncstatus") @JsonNames("sync_status") val syncStatus: String = SyncStatus.PENDING
 )
 
 @Serializable
 @Entity(tableName = "impilatrice_scrap_records")
 data class ImpilatriceScrapRecord(
     @PrimaryKey @SerialName("id") val id: String = randomUUID(),
-    @SerialName("reportid") val reportId: String,
+    @SerialName("reportid") @JsonNames("report_id") val reportId: String,
     @SerialName("timestamp") val timestamp: Long,
-    @SerialName("plcvalue") val plcValue: Double,
+    @SerialName("plcvalue") @JsonNames("plc_value") val plcValue: Double,
     
-    @SerialName("lastupdated") val lastUpdated: Long = com.example.man_app.util.getNowMillis(),
-    @SerialName("syncstatus") val syncStatus: String = SyncStatus.PENDING
+    @SerialName("lastupdated") @JsonNames("last_updated") val lastUpdated: Long = com.example.man_app.util.getNowMillis(),
+    @SerialName("syncstatus") @JsonNames("sync_status") val syncStatus: String = SyncStatus.PENDING
 )
 
 @Serializable
 @Entity(tableName = "impilatrice_kiln_cars")
 data class ImpilatriceKilnCar(
     @PrimaryKey @SerialName("id") val id: String = randomUUID(),
-    @SerialName("reportid") val reportId: String,
-    @SerialName("starttime") val startTime: Long,
-    @SerialName("endtime") val endTime: Long? = null,
+    @SerialName("reportid") @JsonNames("report_id") val reportId: String,
+    @SerialName("starttime") @JsonNames("start_time") val startTime: Long,
+    @SerialName("endtime") @JsonNames("end_time") val endTime: Long? = null,
     @SerialName("sigla") val sigla: String? = null,
-    @SerialName("iscleaned") val isCleaned: Boolean = false,
-    @SerialName("loadpercentage") val loadPercentage: Int = 100,
-    @SerialName("refractoriesok") val refractoriesOk: Boolean = true,
+    @SerialName("iscleaned") @JsonNames("is_cleaned") val isCleaned: Boolean = false,
+    @SerialName("loadpercentage") @JsonNames("load_percentage") val loadPercentage: Int = 100,
+    @SerialName("refractoriesok") @JsonNames("refractories_ok") val refractoriesOk: Boolean = true,
     
     // Analisi Pezzo
     @SerialName("height") val height: Double = 0.0,
     @SerialName("width") val width: Double = 0.0,
     @SerialName("thickness") val thickness: Double = 0.0,
     @SerialName("weight") val weight: Double = 0.0,
-    @SerialName("isdiagonalok") val isDiagonalOk: Boolean = true,
+    @SerialName("isdiagonalok") @JsonNames("is_diagonal_ok") val isDiagonalOk: Boolean = true,
     
-    @SerialName("dryingrating") val dryingRating: String = "Essiccato", // Essiccato / Umido
+    @SerialName("dryingrating") @JsonNames("drying_rating") val dryingRating: String = "Essiccato", // Essiccato / Umido
+    @SerialName("colorrating") @JsonNames("color_rating") val colorRating: String = "Normale", // Normale / Anomalo
+    
+    @SerialName("notes") val notes: String = "",
+    @SerialName("lastupdated") @JsonNames("last_updated") val lastUpdated: Long = com.example.man_app.util.getNowMillis(),
+    @SerialName("syncstatus") @JsonNames("sync_status") val syncStatus: String = SyncStatus.PENDING
+)
     @SerialName("chipsrating") val chipsRating: String = "Nessuna", // Nessuna / Poche / Molte
     @SerialName("cracksrating") val cracksRating: String = "Nessuna",
     @SerialName("hairlinesrating") val hairlinesRating: String = "Nessuna",
